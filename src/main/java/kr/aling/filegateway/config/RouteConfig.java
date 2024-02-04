@@ -28,9 +28,9 @@ public class RouteConfig {
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                    .route("file-api-server", r -> r.path(fileServerProperties.getServerPath())
-                            .filters(f -> f.rewritePath("/file/(?<path>.*)", "/${path}"))
-                            .uri(fileServerProperties.getServerUrl()))
+                .route("file-api-server", r -> r.path("/file/**")
+                        .filters(f -> f.rewritePath("/file/(?<path>.*)", "/${path}"))
+                        .uri(fileServerProperties.getServerUrl()))
                 .build();
     }
 }

@@ -15,7 +15,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "aling.file")
 public class FileServerProperties {
 
-    private String serverPath;
     private String serverUrl;
 
 }

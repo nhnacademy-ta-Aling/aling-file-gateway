@@ -29,7 +29,7 @@ public class FileHeaderFilter extends AbstractGatewayFilterFactory<FileHeaderFil
         return ((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
 
-            if (existFileSaveLocationHeader(request)) {
+            if (!existFileSaveLocationHeader(request)) {
 
                 request.mutate()
                         .header(X_FILE_SAVE_LOCATION, OBJECT_STORAGE)
@@ -44,10 +44,10 @@ public class FileHeaderFilter extends AbstractGatewayFilterFactory<FileHeaderFil
      * X-File-Save-Location 헤더가 있는지 검사 하는 메서드.
      *
      * @param request ServerHttpRequest
-     * @return 헤더가 없다면 true, 있다면 false
+     * @return 헤더가 있다면 true, 없으면 false
      */
     private static boolean existFileSaveLocationHeader(ServerHttpRequest request) {
-        return !request.getHeaders().containsKey(X_FILE_SAVE_LOCATION);
+        return request.getHeaders().containsKey(X_FILE_SAVE_LOCATION);
     }
 
     /**
